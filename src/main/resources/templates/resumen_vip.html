@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>VIP SERVICE VOUCHER | OFICIAL</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background: #0a0a0a; color: #eee; font-family: 'Inter', sans-serif; padding: 30px 0; }
+        .voucher-container { background: #111; border: 2px solid #D4AF37; padding: 40px; }
+        .gold-header { color: #D4AF37; font-weight: 900; text-transform: uppercase; letter-spacing: 4px; border-bottom: 2px solid #D4AF37; padding-bottom: 15px; margin-bottom: 30px; }
+        .section-tag { background: #D4AF37; color: #000; padding: 3px 12px; font-size: 0.7rem; font-weight: bold; border-radius: 4px; margin-bottom: 10px; display: inline-block; }
+        .label { color: #777; font-size: 0.75rem; text-transform: uppercase; margin-bottom: 2px; }
+        .value { font-size: 0.95rem; color: #fff; margin-bottom: 12px; font-weight: 500; border-left: 2px solid #333; padding-left: 10px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-11">
+                <div class="voucher-container shadow-lg">
+                    <div class="text-center">
+                        <h1 class="gold-header">VIP Transport Confirmation</h1>
+                        <p class="text-secondary">RESERVATION ID: #<span th:text="${reserva.id}"></span></p>
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="col-md-4">
+                            <div class="section-tag">1 & 2. CLIENT & SERVICE</div>
+                            <p class="label">Passenger</p>
+                            <p class="value" th:text="${reserva.nombreCompleto}"></p>
+                            <p class="label">Phone</p>
+                            <p class="value" th:text="${reserva.celularFull}"></p>
+                            <p class="label">Service Type</p>
+                            <p class="value" th:text="${reserva.tipoServicio}"></p>
+                            <p class="label">Route</p>
+                            <p class="value" th:text="${reserva.origen + ' ➔ ' + (reserva.destino != '' ? reserva.destino : 'As Directed')}"></p>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="section-tag">3 & 4. PASSENGERS & VEHICLE</div>
+                            <p class="label">VIP Passenger Name</p>
+                            <p class="value" th:text="${reserva.nombrePasajeroVip != '' ? reserva.nombrePasajeroVip : reserva.nombreCompleto}"></p>
+                            <p class="label">Vehicle Category</p>
+                            <p class="value" th:text="${reserva.categoriaVehiculo}"></p>
+                            <p class="label">Brand/Color</p>
+                            <p class="value" th:text="${reserva.marcaColor}"></p>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="section-tag">5 & 6. FLIGHT & VIP EXPERIENCE</div>
+                            <p class="label">Airline & Flight</p>
+                            <p class="value" th:text="${reserva.aerolinea + ' - ' + reserva.numVuelo}"></p>
+                            <p class="label">Security Service</p>
+                            <p class="value" th:text="${reserva.seguridadEscolta == 'SI' ? 'YES: ' + reserva.tipoSeguridad : 'NO'}"></p>
+                            <p class="label">Music / Temp</p>
+                            <p class="value" th:text="${reserva.musicaPref + ' | ' + reserva.temperaturaPref}"></p>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-5">
+                        <button onclick="window.print()" class="btn btn-warning fw-bold px-5">PRINT OFFICIAL DOCUMENT</button>
+                        <a href="/nivel1" class="btn btn-outline-light ms-2">NEW RESERVATION</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
