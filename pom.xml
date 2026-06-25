@@ -16,6 +16,7 @@
     <groupId>com.vip_transport_pro</groupId>
     <artifactId>vip-transport-pro</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>war</packaging> <!-- VITAL PARA JSP -->
     <name>vip-transport-pro</name>
 
     <properties>
@@ -23,7 +24,6 @@
     </properties>
 
     <dependencies>
-
         <!-- WEB -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -43,7 +43,7 @@
             <scope>runtime</scope>
         </dependency>
 
-        <!-- JSP -->
+        <!-- JSP ENGINE (Jasper) -->
         <dependency>
             <groupId>org.apache.tomcat.embed</groupId>
             <artifactId>tomcat-embed-jasper</artifactId>
@@ -54,7 +54,6 @@
             <groupId>jakarta.servlet.jsp.jstl</groupId>
             <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.glassfish.web</groupId>
             <artifactId>jakarta.servlet.jsp.jstl</artifactId>
@@ -79,12 +78,11 @@
             <optional>true</optional>
         </dependency>
 
-        <!-- DEVTOOLS -->
+        <!-- TOMCAT PROVIDED (Para empaquetado WAR) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <scope>runtime</scope>
-            <optional>true</optional>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <scope>provided</scope>
         </dependency>
 
         <!-- TEST -->
@@ -93,17 +91,23 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-
     </dependencies>
 
     <build>
-             <finalName>app</finalName> <!-- ESTA LÍNEA ES VITAL -->
+        <finalName>app</finalName> <!-- VITAL PARA DOCKER -->
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
+                </configuration>
             </plugin>
-
         </plugins>
     </build>
 
